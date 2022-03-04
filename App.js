@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View, FlatList, SafeAreaView, Alert, Keyboard } from 'react-native';
 import {Header} from './components/Header'
 import {Task} from './components/Task'
 import {AddTask} from './components/AddTask'
-import { v4 as uuidv4 } from 'uuid';
+import uuid  from 'uuid';
 export default function App() {
   const [tasks, setTasks] = useState([
     { "task": "HTML I", "done": true, "id": "1" },
@@ -13,12 +13,18 @@ export default function App() {
 
   ])
   const addTask = (text) => {
-    setTasks(prevTasks => {
-      return [{task: text, id: uuidv4() }, ...prevTasks]
-    })
+    if(!text){
+      Alert.alert('No tasks?', 'Please add a task', [{text: 'OK', style: 'destructive'}])
+    }else{
+      setTasks(prevTasks => {
+        return [{task: text, id: uuid() }, ...prevTasks]
+      })
+    }
+
 
   }
   return (
+    <TouchableWithoutFeedback onPress={ ()=> Keyboard.dismiss()}>
     <SafeAreaView style={styles.container}>
       <Header />
       <AddTask addTask={addTask}/>
@@ -32,6 +38,7 @@ export default function App() {
 
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
