@@ -20,7 +20,12 @@ export default function App() {
         return [{task: text, id: uuid() }, ...prevTasks]
       })
     }
+  }
 
+  const deleteTask = (id) => {
+    setTasks( prevTasks => {
+      return prevTasks.filter( item => item.id !== id)
+    })
 
   }
   return (
@@ -32,7 +37,7 @@ export default function App() {
         <View style={styles.list}>
           <FlatList
             data={tasks}
-            renderItem={({item}) => <Task item={item} />}
+            renderItem={({item}) => <Task item={item} deleteTask={()=>deleteTask(item.id)}/>}
           />
         </View>
 
