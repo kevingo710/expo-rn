@@ -1,10 +1,11 @@
 import React from 'react'
-import {  TouchableOpacity, StyleSheet, Text } from 'react-native'
+import {  TouchableOpacity, Text } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
+import { global } from '../styles/styles';
 
 export const Task = ({item, deleteTask}) => {
   return (
-    <TouchableOpacity style={styles.taksItem}>
+    <TouchableOpacity style={global.taksItem}>
         <Text>
         {item.task}
         </Text>
@@ -13,16 +14,3 @@ export const Task = ({item, deleteTask}) => {
   )
 }
 
-
-const styles = StyleSheet.create({
-    taksItem: {
-        borderColor: 'black',
-        borderStyle: 'dashed',
-        borderRadius: 5,
-        borderWidth: 1,
-        marginTop: 10,
-        padding: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    }
-})
